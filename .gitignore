@@ -38,3 +38,6 @@ out/
 
 ### Misc ###
 **/.DS_Store
+
+### DB ###
+*.db
