@@ -21,7 +21,7 @@ class MemberServiceIntegrationTest {
 
 
     @Test
-    void join() {
+    void 회원가입() {
         // given
         Member member = new Member();
         member.setName("spring");
@@ -35,7 +35,7 @@ class MemberServiceIntegrationTest {
     }
 
     @Test
-    public void duplicated_member_exception() {
+    public void 중복이름_회원가입_예외() {
         // given
         Member member1 = new Member();
         member1.setName("spring");

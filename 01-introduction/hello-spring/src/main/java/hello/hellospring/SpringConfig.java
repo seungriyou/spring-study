@@ -1,9 +1,7 @@
 package hello.hellospring;
 
-import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
-import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,23 +9,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringConfig {
 
-    // Jdbc, JdbcTemplate에서는 DataSource를 DI 해주었으나,
-    // JPA에서는 EntityManager를 DI 해준다. (생성자 주입 + @Autowired)
-    // EntityManager는 DataSource와 마찬가지로 application.properties에 적힌 정보를 토대로 스프링 빈으로 생성 및 관리된다.
-    private EntityManager em;
+    // MemberRepository를 상속 받고 있는 리포지토리 인터페이스의 구현체가 스프링 데이터 JPA에 의해 이미 스프링 빈으로 등록되어 있다.
+    // 따라서 SpringConfig에서 새로 생성 및 @Bean으로 등록할 필요 없이, 생성자로 주입만 받으면 된다.
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());   // MemberRepository를 넣어주어야 하므로
+        return new MemberService(memberRepository);   // MemberRepository를 넣어주어야 하므로
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
-        return new JpaMemberRepository(em);
-    }
 }
