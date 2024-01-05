@@ -23,4 +23,11 @@ public class SpringConfig {
         return new MemberService(memberRepository);   // MemberRepository를 넣어주어야 하므로
     }
 
+    /*
+    @Bean
+    public TimeTraceAop timeTraceAop() {
+        // AOP는 컴포넌트 스캔 방식보다 명시적으로 직접 스프링 빈에 등록하는 것을 권장한다. (정형화 X)
+        return new TimeTraceAop();
+    }
+    */
 }
