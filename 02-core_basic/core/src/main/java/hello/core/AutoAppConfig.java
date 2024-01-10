@@ -13,4 +13,12 @@ import org.springframework.context.annotation.FilterType;
 )
 public class AutoAppConfig {
 
+    // 다음과 같이 이름이 동일한 스프링 빈을 수동으로 등록하면 스프링 부트 어플리케이션 실행 시 오류가 발생한다.
+    /*
+    @Bean(name = "memoryMemberRepository")
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+    */
+
 }
