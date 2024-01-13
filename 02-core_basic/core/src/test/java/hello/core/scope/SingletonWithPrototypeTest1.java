@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
@@ -33,21 +34,17 @@ public class SingletonWithPrototypeTest1 {
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(2);
+        assertThat(count2).isEqualTo(1);
     }
 
     @Scope("singleton")
     static class ClientBean {
-        // ClientBean의 생성 후 의존관계 주입 시점에 프로토타입 스코프 빈의 주입이 완료 되어버리고, 계속 그것을 쓴다.
-        // 하지만 프로토타입 스코프 빈의 본래 의도는, 로직을 호출할 때마다 프로토타입을 항상 새로 생성해서 사용하려는 것이다!
-        private final PrototypeBean prototypeBean;
-
-        @Autowired  // @Autowired 생략해도 ok, lombok 이용하여 생성자 자체를 생략해도 ok
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+        @Autowired
+        private ApplicationContext ac;
 
         public int logic() {
+            // 싱글톤 빈이 프로토타입 빈을 사용할 때마다 스프링 컨테이너에 새로 요청하기
+            PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
