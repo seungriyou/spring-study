@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import java.util.UUID;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 /*
@@ -11,7 +12,7 @@ request 스코프 빈은 HTTP request 단위로 존재하며,
 스프링 컨테이너에게 효청하는 시점에 생성되고, HTTP request가 끝나는 시점에 소멸된다.
  */
 @Component
-@Scope(value = "request")
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MyLogger {
 
     private String uuid;
