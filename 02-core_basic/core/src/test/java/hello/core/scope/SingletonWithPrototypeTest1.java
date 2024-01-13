@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
@@ -40,11 +40,10 @@ public class SingletonWithPrototypeTest1 {
     @Scope("singleton")
     static class ClientBean {
         @Autowired
-        private ApplicationContext ac;
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
 
         public int logic() {
-            // 싱글톤 빈이 프로토타입 빈을 사용할 때마다 스프링 컨테이너에 새로 요청하기
-            PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
