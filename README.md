@@ -30,3 +30,4 @@
 | `setting` | Java 버전 변경 (11 → 17) (OpenJDK) | [LINK →](https://github.com/seungriyou/spring-study/issues/1) |
 | `setting` | 스프링 부트 프로젝트 생성 및 IntelliJ 사용법 | [LINK →](https://github.com/seungriyou/spring-study/issues/2) |
 | `tip` | IntelliJ 단축키 모음 | [LINK →](https://github.com/seungriyou/spring-study/issues/3) |
+| `tip` | 특정 스프링 부트 버전에서 지원하는 의존성 버전 확인 및 선택하기 | [LINK →](https://github.com/seungriyou/spring-study/issues/8) |
