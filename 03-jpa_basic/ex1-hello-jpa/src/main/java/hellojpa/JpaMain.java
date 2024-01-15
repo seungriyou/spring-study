@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -17,17 +16,11 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            // 수행하고 싶은 동작
-            // em.createQuery에서의 쿼리의 대상은 테이블이 아니라 객체가 된다. (m: Member 엔티티)
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
-
-            for (Member member : result) {
-                System.out.println("member.getName() = " + member.getName());
-            }
-            // transaction 커밋
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAAAAA");
+            // 준영속 상태로 전환
+            em.detach(member);
+            System.out.println("======================");
             tx.commit();
         } catch (Exception e) {
             // 오류가 발생했으면 롤백

@@ -1,9 +1,7 @@
 package hellojpa;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 // @Table(name = "USER")
@@ -13,6 +11,17 @@ public class Member {
     private Long id;
     // @Column(name = "username")
     private String name;
+
+    // JPA를 사용할 때는 기본 생성자가 필요하다. (IDE가 알려준다!)
+    public Member() {
+
+    }
+
+    public Member(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
 
     public Long getId() {
         return id;
