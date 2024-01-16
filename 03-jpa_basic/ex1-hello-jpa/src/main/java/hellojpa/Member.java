@@ -18,8 +18,8 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne  // Member 입장에서는 Many, Team 입장에서는 One
-    @JoinColumn(name = "TEAM_ID")   // Team을 매핑해야 하는 컬럼이 TEAM_ID
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
     public Long getId() {
@@ -36,13 +36,5 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 }
