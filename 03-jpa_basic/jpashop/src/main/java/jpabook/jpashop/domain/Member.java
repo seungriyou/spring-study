@@ -12,10 +12,15 @@ public class Member {
     @GeneratedValue
     @Column(name = "MEMBER_ID")
     private Long id;
+
     private String name;
+
     private String city;
+
     private String street;
+
     private String zipcode;
+    
 
     public Long getId() {
         return id;
