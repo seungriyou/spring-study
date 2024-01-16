@@ -3,28 +3,28 @@ package hellojpa;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-@SequenceGenerator(
-        name = "MEMBER_SEQ_GENERATOR",
-        sequenceName = "MEMBER_SEQ",
-        initialValue = 1, allocationSize = 50
-)
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "USERNAME")
     private String username;
 
-    // JPA를 위한 기본 생성자
-    public Member() {
-    }
+    // 객체지향적 X (외래키 식별자를 직접 다룸)
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+
+    @ManyToOne  // Member 입장에서는 Many, Team 입장에서는 One
+    @JoinColumn(name = "TEAM_ID")   // Team을 매핑해야 하는 컬럼이 TEAM_ID
+    private Team team;
 
     public Long getId() {
         return id;
@@ -40,5 +40,13 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
