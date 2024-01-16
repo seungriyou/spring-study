@@ -18,10 +18,6 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-    // 객체지향적 X (외래키 식별자를 직접 다룸)
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
     @ManyToOne  // Member 입장에서는 Many, Team 입장에서는 One
     @JoinColumn(name = "TEAM_ID")   // Team을 매핑해야 하는 컬럼이 TEAM_ID
     private Team team;
@@ -48,13 +44,5 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
-    }
-
-    // Member 쪽의 연관관계 편의 메서드
-    public void changeTeam(Team team) {
-        this.team = team;
-
-        // 추가
-        team.getMembers().add(this);
     }
 }
