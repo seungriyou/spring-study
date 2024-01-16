@@ -49,4 +49,12 @@ public class Member {
     public void setTeam(Team team) {
         this.team = team;
     }
+
+    // Member 쪽의 연관관계 편의 메서드
+    public void changeTeam(Team team) {
+        this.team = team;
+
+        // 추가
+        team.getMembers().add(this);
+    }
 }
