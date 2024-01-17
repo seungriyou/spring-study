@@ -1,12 +1,17 @@
 package hellojpa;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class EmbeddedMember {
@@ -19,23 +24,18 @@ public class EmbeddedMember {
     @Column(name = "USERNAME")
     private String username;
 
-    // 기간
-    @Embedded
-    private Period workPeriod;
-
-    // 주소
     @Embedded
     private Address homeAddress;
 
-    // 동일한 Address 임베디드 타입을 여러 개 사용하면 컬럼 중복 문제 발생
-    // -> @AttributeOverride를 통해 속성 재정의 해야 함
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "WORK_CITY")),
-            @AttributeOverride(name = "street", column = @Column(name = "WORK_STREET")),
-            @AttributeOverride(name = "zipcode", column = @Column(name = "WORK_ZIPCODE"))
-    })
-    private Address workAddress;
+    // 값 타입 컬렉션: favoriteFoods, addressHistory
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @Column(name = "FOOD_NAME") // 컬럼명 정의 (임베디드 타입이 아니므로 지정)
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    private List<Address> addressHistory = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -53,19 +53,27 @@ public class EmbeddedMember {
         this.username = username;
     }
 
-    public Period getWorkPeriod() {
-        return workPeriod;
-    }
-
-    public void setWorkPeriod(Period workPeriod) {
-        this.workPeriod = workPeriod;
-    }
-
     public Address getHomeAddress() {
         return homeAddress;
     }
 
     public void setHomeAddress(Address homeAddress) {
         this.homeAddress = homeAddress;
+    }
+
+    public Set<String> getFavoriteFoods() {
+        return favoriteFoods;
+    }
+
+    public void setFavoriteFoods(Set<String> favoriteFoods) {
+        this.favoriteFoods = favoriteFoods;
+    }
+
+    public List<Address> getAddressHistory() {
+        return addressHistory;
+    }
+
+    public void setAddressHistory(List<Address> addressHistory) {
+        this.addressHistory = addressHistory;
     }
 }
