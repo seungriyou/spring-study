@@ -4,8 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import java.util.List;
-import java.util.Set;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -18,7 +16,6 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            /* 값 타입 저장 */
             EmbeddedMember member = new EmbeddedMember();
             member.setUsername("member1");
             member.setHomeAddress(new Address("homeCity", "street", "10000"));
@@ -28,43 +25,16 @@ public class JpaMain {
             member.getFavoriteFoods().add("족발");
             member.getFavoriteFoods().add("피자");
 
-            // 값 타입 컬렉션
-            member.getAddressHistory().add(new Address("old1", "street", "1034"));
-            member.getAddressHistory().add(new Address("old2", "street", "1034"));
+            // 값 타입 컬렉션 대신 일대다 관계
+            member.getAddressHistory().add(new AddressEntity("old1", "street", "1034"));
+            member.getAddressHistory().add(new AddressEntity("old2", "street", "1034"));
 
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            /* 값 타입 조회 */
             EmbeddedMember findMember = em.find(EmbeddedMember.class, member.getId());
-
-            // 값 타입 컬렉션은 지연 로딩
-            List<Address> addressHistory = findMember.getAddressHistory();
-            for (Address address : addressHistory) {
-                System.out.println("address.getCity() = " + address.getCity());
-            }
-
-            Set<String> favoriteFoods = findMember.getFavoriteFoods();
-            for (String favoriteFood : favoriteFoods) {
-                System.out.println("favoriteFood = " + favoriteFood);
-            }
-
-            /* 값 타입 수정 */
-            // findMember.getHomeAddress().setCity("newCity") -> 값 타입은 immutable 해야 하므로 X
-            Address oldAddress = findMember.getHomeAddress();
-            findMember.setHomeAddress(new Address("newCity", oldAddress.getStreet(), oldAddress.getZipcode()));
-
-            // 값 타입 컬렉션 수정
-            findMember.getFavoriteFoods().remove("치킨");
-            findMember.getFavoriteFoods().add("한식");
-
-            // 컬렉션에서 객체를 지울 때 -> equals()를 이용한다. (제대로 재정의 해두어야 한다.)
-            // 동일한 값을 가지는 새로운 객체를 생성해서 remove()에 넘기고,
-            // 새로운 값을 가지는 객체를 생성해서 add()에 넘긴다.
-            findMember.getAddressHistory().remove(new Address("old1", "street", "1034"));
-            findMember.getAddressHistory().add(new Address("newCity1", "street", "1034"));
 
             tx.commit();
         } catch (Exception e) {
