@@ -16,15 +16,25 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
+
+            Address address = new Address("city", "street", "1999");
+
             EmbeddedMember member = new EmbeddedMember();
             member.setUsername("hello");
-            member.setHomeAddress(
-                    new Address("city", "street", "1999")
+            member.setHomeAddress(address);
+
+            // address.setCity("newCity"); 불가능
+            // 값 타입은 통으로 갈아끼우는 것이 맞다!
+            // 복사해서 새롭게 생성하자.
+            Address newAddress = new Address(
+                    "NewCity",
+                    address.getStreet(),
+                    address.getZipcode()
             );
-            member.setWorkPeriod(new Period());
+            member.setHomeAddress(newAddress);
 
             em.persist(member);
-            
+
             tx.commit();
         } catch (Exception e) {
             // 오류가 발생했으면 롤백
