@@ -16,21 +16,15 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
+            EmbeddedMember member = new EmbeddedMember();
+            member.setUsername("hello");
+            member.setHomeAddress(
+                    new Address("city", "street", "1999")
+            );
+            member.setWorkPeriod(new Period());
 
-            Child child1 = new Child();
-            Child child2 = new Child();
-
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
-            em.persist(parent);
-
-            em.flush();
-            em.clear();
-
-            Parent findParent = em.find(Parent.class, parent.getId());
-            em.remove(findParent);
-
+            em.persist(member);
+            
             tx.commit();
         } catch (Exception e) {
             // 오류가 발생했으면 롤백
