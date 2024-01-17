@@ -17,7 +17,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "ORDERS") // order가 예약어인 DB가 있으므로
-public class Order {
+public class Order extends BaseEntity {
 
     @Id
     @GeneratedValue
