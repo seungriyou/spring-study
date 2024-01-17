@@ -16,16 +16,21 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member = new Member();
-            member.setUsername("member1");
-            em.persist(member);
 
-            Team team = new Team();
-            team.setName("teamA");
-            // 다음의 코드로 인해 외래키가 바뀌어야 하므로, Team 테이블이 아닌 Member 테이블이 바뀌게 된다.
-            // 즉, Member 테이블에 대해 update 쿼리가 나가게 된다.
-            team.getMembers().add(member);
-            em.persist(team);
+            Movie movie = new Movie();
+            movie.setDirector("AAAA");
+            movie.setActor("BBB");
+            movie.setName("바람과 함께 사라지다");
+            movie.setPrice(10000);
+
+            em.persist(movie);
+
+            // sql 확인용 (1차 캐시 X)
+            em.flush();
+            em.clear();
+
+            Movie findMovie = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie = " + findMovie);
 
             tx.commit();
         } catch (Exception e) {
