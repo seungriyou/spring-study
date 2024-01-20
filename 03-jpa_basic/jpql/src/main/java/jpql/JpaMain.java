@@ -18,32 +18,52 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Team teamA = new Team();
+            teamA.setName("teamA");
+            em.persist(teamA);
 
-            Member member = new Member();
-            member.setUsername("teamA");
-            member.setAge(10);
-            member.setType(MemberType.ADMIN);
-            member.changeTeam(team);
-            em.persist(member);
+            Team teamB = new Team();
+            teamB.setName("teamB");
+            em.persist(teamB);
+
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setAge(10);
+            member1.setType(MemberType.ADMIN);
+            member1.changeTeam(teamA);
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setAge(10);
+            member2.setType(MemberType.ADMIN);
+            member2.changeTeam(teamA);
+            em.persist(member2);
+
+            Member member3 = new Member();
+            member3.setUsername("member3");
+            member3.setAge(10);
+            member3.setType(MemberType.ADMIN);
+            member3.changeTeam(teamB);
+            em.persist(member3);
 
             em.flush();
             em.clear();
 
-            String query =
-                    "select " +
-                            "case when m.age <= 10 then '학생요금' " +
-                            "     when m.age >= 60 then '경로요금' " +
-                            "     else '일반요금' " +
-                            "end " +
-                            "from Member m";
-            List<String> result = em.createQuery(query, String.class)
+            String query = "select t from Team t join fetch t.members";
+
+            List<Team> result = em.createQuery(query, Team.class)
+//                    .setFirstResult(0)
+//                    .setMaxResults(2)
                     .getResultList();
 
-            for (String s : result) {
-                System.out.println("s = " + s);
+            System.out.println("result = " + result.size());
+
+            for (Team team : result) {
+                System.out.println("team = " + team.getName() + " | members = " + team.getMembers().size());
+                for (Member member : team.getMembers()) {
+                    System.out.println("-> member = " + member);
+                }
             }
 
             tx.commit();
