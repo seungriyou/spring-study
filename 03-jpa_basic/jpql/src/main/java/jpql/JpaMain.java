@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
 
@@ -47,16 +46,16 @@ public class JpaMain {
             member3.changeTeam(teamB);
             em.persist(member3);
 
-            em.flush();
+            // 나이를 모두 20세로 변경하는 벌크 연산을 수행한다.
+            // 벌크 연산을 수행하면 em.flush()가 자동으로 호출된다.
+            int resultCount = em.createQuery("update Member m set m.age = 20")
+                    .executeUpdate();
+            System.out.println("resultCount = " + resultCount);
+
+            // 영속성 컨텍스트를 초기화해야 한다!! ***
             em.clear();
-
-            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
-                    .setParameter("username", "member1")
-                    .getResultList();
-
-            for (Member member : resultList) {
-                System.out.println("member = " + member);
-            }
+            Member findMember = em.find(Member.class, member1.getId());
+            System.out.println("findMember.getAge() = " + findMember.getAge());
 
             tx.commit();
         } catch (Exception e) {
