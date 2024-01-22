@@ -52,4 +52,10 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        // 트랜잭션 내에서 엔티티 수정 -> 커밋 시 DB에 반영
+        member.setName(name);
+    }
 }
