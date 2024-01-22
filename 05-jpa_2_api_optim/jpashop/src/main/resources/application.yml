@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none # create
+      ddl-auto: create
     properties:
       hibernate:
         # show_sql: true        # sout으로 sql 찍기
