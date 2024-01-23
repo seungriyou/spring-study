@@ -93,6 +93,15 @@ public class OrderApiController {
 
     }
 
+    /*
+    V5: JPA에서 DTO 직접 조회 (w/ 컬렉션 조회 시 N+1 문제 최적화)
+     */
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> ordersV5() {
+        return orderQueryRepository.findAllByDto_optim();
+
+    }
+
     @Getter
     static class OrderDto {
 
