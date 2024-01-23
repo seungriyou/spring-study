@@ -128,4 +128,14 @@ public class OrderRepository {
                         " join fetch oi.item i", Order.class
         ).getResultList();
     }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        // 페이징 가능!
+        return em.createQuery("select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)    // ToOne 관계까지는 페치 조인한다. 그 이후는 지연 로딩으로!
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }
