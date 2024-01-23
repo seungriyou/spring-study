@@ -13,6 +13,7 @@ spring:
         # show_sql: true        # sout으로 sql 찍기
         format_sql: true
         default_batch_fetch_size: 100
+    open-in-view: false
 
 logging:
   level:
