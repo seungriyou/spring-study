@@ -5,8 +5,10 @@ import java.util.List;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.OrderStatus;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(of = "orderId")  // orderId 기준으로 같은 것 묶어주기 위함
 public class OrderQueryDto {
 
     private Long orderId;
@@ -22,5 +24,14 @@ public class OrderQueryDto {
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
         this.address = address;
+    }
+
+    public OrderQueryDto(Long orderId, String name, LocalDateTime orderDate, OrderStatus orderStatus, Address address, List<OrderItemQueryDto> orderItems) {
+        this.orderId = orderId;
+        this.name = name;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.address = address;
+        this.orderItems = orderItems;
     }
 }
