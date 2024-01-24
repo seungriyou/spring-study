@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,10 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 // JPA를 사용하므로 엔티티에는 기본 생성자가 있어야 한다. (public, protected 가능)
 @ToString(of = {"id", "username", "age"})   // "team"을 추가하면 양방향 연관관계로 무한루프
+@NamedQuery(
+        name = "Member.findByUsername",
+        query = "select m from Member m where m.username = :username"
+)
 public class Member {
 
     @Id
