@@ -19,4 +19,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(name = "Member.findByUsername")
     // -> 생략해도 된다!
     List<Member> findByUsername(@Param("username") String username);
+
+    // <3> @Query: 리포지토리 메서드에 쿼리 정의하기
+    // JPQL을 인터페이스 메서드에 작성할 수 있다. (실무에서 많이 쓴다!)
+    @Query("select m from Member m where m.username = :username and m.age = :age")
+    List<Member> findUser(@Param("username") String username, @Param("age") int age);
 }
