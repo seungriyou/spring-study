@@ -45,7 +45,8 @@
 | 구분 | 제목 | 바로가기 |
 | --- | --- | --- |
 | `java` | Java 지식 조각 모음 | [LINK →](https://github.com/seungriyou/spring-study/issues/9) |
-| `setting` | 새로운 프로젝트를 불러올 때마다 다시 설정해야 할 것 | [LINK →](https://github.com/seungriyou/spring-study/issues/2#issuecomment-1890870223) |
+| `spring boot` | 프로젝트 생성 시 해야할 것 | [LINK →](https://github.com/seungriyou/spring-study/issues/13) |
+| `spring boot` | 궁금증 해결 노트 | [LINK →](https://github.com/seungriyou/spring-study/issues/11) |
 | `setting` | Java 버전 변경 (11 → 17) (OpenJDK) | [LINK →](https://github.com/seungriyou/spring-study/issues/1) |
 | `setting` | 스프링 부트 프로젝트 생성 및 IntelliJ 사용법 | [LINK →](https://github.com/seungriyou/spring-study/issues/2) |
 | `tip` | IntelliJ 단축키 모음 | [LINK →](https://github.com/seungriyou/spring-study/issues/3) |
