@@ -239,4 +239,32 @@ class MemberRepositoryTest {
             System.out.println("member.team = " + member.getTeam().getName());  // 프록시 초기화
         }
     }
+
+    @Test
+    public void queryHint() {
+        // given
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        // when
+        Member findMember = memberRepository.findReadOnlyByUsername("member1");
+        findMember.setUsername("member2");
+
+        em.flush(); // 변경 감지(dirty checking) X -> update query X
+    }
+
+    @Test
+    public void lock() {
+        // given
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        // when
+        List<Member> result = memberRepository.findLockByUsername("member1");
+        
+    }
 }
