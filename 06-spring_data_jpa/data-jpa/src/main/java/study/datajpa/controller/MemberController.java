@@ -1,6 +1,5 @@
 package study.datajpa.controller;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,7 +46,7 @@ public class MemberController {
         // return memberRepository.findAll(pageable).map(MemberDto::new);
     }
 
-    @PostConstruct
+    // @PostConstruct
     public void init() {
         // 데이터 넣기
         for (int i = 0; i < 100; i++) {
