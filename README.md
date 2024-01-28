@@ -16,11 +16,13 @@
 | 04 | [실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-%ED%99%9C%EC%9A%A9-1) | ✅ |  [LINK →](https://github.com/seungriyou/spring-study/issues/7) | [LINK →](04-jpa_1_app/jpashop) |
 | 05 | [실전! 스프링 부트와 JPA 활용2 - API 개발과 성능 최적화](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-API%EA%B0%9C%EB%B0%9C-%EC%84%B1%EB%8A%A5%EC%B5%9C%EC%A0%81%ED%99%94) | ✅ | [LINK →](https://github.com/seungriyou/spring-study/issues/10) | [LINK →](05-jpa_2_api_optim/jpashop) |
 | 06 | [실전! 스프링 데이터 JPA](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-JPA-%EC%8B%A4%EC%A0%84) | ✅ | [LINK →](https://github.com/seungriyou/spring-study/issues/12) | [LINK →](06-spring_data_jpa/data-jpa) |
-| 07 | [실전! Querydsl](https://www.inflearn.com/course/querydsl-%EC%8B%A4%EC%A0%84) |  | [LINK →](https://github.com/seungriyou/spring-study/issues/15) | [LINK →]() |
-| 08 | [스프링 MVC 2편 - 백엔드 웹 개발 활용 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-2) | |  |  |
-| 09 | [스프링 DB 1편 - 데이터 접근 핵심 원리](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-db-1) | |  |  |
-| 10 | [스프링 DB 2편 - 데이터 접근 활용 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-db-2) | |  |  |
-| 11 | [스프링부트 시큐리티 & JWT 강의](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0) | | | |
+| 07 | [실전! Querydsl](https://www.inflearn.com/course/querydsl-%EC%8B%A4%EC%A0%84) | ✅ | [LINK →](https://github.com/seungriyou/spring-study/issues/15) | [LINK →](07-querydsl/querydsl) |
+| 08 | [스프링 시큐리티](https://youtube.com/playlist?list=PLJkjrxxiBSFCKD9TRKDYn7IE96K2u3C3U&si=3DD4TcXeCX3WEBgu) / [자료](https://substantial-park-a17.notion.site/6968e46b8f454963bc1ee290e8351cab) | | | |
+| 09 | [스프링 시큐리티 JWT](https://youtube.com/playlist?list=PLJkjrxxiBSFCcOjy0AAVGNtIa08VLk1EJ&si=jD8xFMzp7zkibDm_) / [자료](https://substantial-park-a17.notion.site/JWT-7a5cd1cf278a407fae9f35166da5ab03) | | | |
+|  | [스프링 MVC 2편 - 백엔드 웹 개발 활용 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-2) | |  |  |
+|  | [스프링 DB 1편 - 데이터 접근 핵심 원리](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-db-1) | |  |  |
+|  | [스프링 DB 2편 - 데이터 접근 활용 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-db-2) | |  |  |
+|  | [스프링부트 시큐리티 & JWT 강의](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0) | | | |
 
 <br>
 
