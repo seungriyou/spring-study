@@ -10,6 +10,7 @@ import study.querydsl.dto.MemberSearchCondition;
 import study.querydsl.dto.MemberTeamDto;
 import study.querydsl.repository.MemberJpaRepository;
 import study.querydsl.repository.MemberRepository;
+import study.querydsl.repository.MemberTestRepository;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,6 +18,8 @@ public class MemberController {
 
     private final MemberJpaRepository memberJpaRepository;
     private final MemberRepository memberRepository;
+
+    private final MemberTestRepository memberTestRepository;
 
     @GetMapping("/v1/members")
     public List<MemberTeamDto> searchMemberV1(MemberSearchCondition condition) {
@@ -27,5 +30,10 @@ public class MemberController {
     public Page<MemberTeamDto> searchMemberV2(MemberSearchCondition condition, Pageable pageable) {
         // Pageable 인터페이스에 데이터가 바인딩되어서 넘어온다.
         return memberRepository.searchPageComplex(condition, pageable);
+    }
+
+    @GetMapping("/v3/members")
+    public Page<MemberTeamDto> searchMemberV3(MemberSearchCondition condition, Pageable pageable) {
+        return memberTestRepository.applyPagination(condition, pageable);
     }
 }
