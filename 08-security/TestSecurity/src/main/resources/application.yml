@@ -1,11 +1,10 @@
 spring:
-  profiles:
-    active: local
   datasource:
-    url: jdbc:h2:tcp://localhost/~/workspace/spring-study/spring-study/08-security/TestSecurity/test
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    # jdbc:mysql://아이피:3306/데이터베이스?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/practice?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: sryou
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
