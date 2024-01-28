@@ -40,6 +40,18 @@ public class SecurityConfig {
         http
                 .csrf((auth) -> auth.disable());                // 스프링 시큐리티에서는 기본적으로 csrf 설정이 되어있는데, 이러면 POST 시 csrf 토큰도 보내주어야 한다.
 
+        // 다중 로그인 관련
+        http
+                .sessionManagement((auth) -> auth
+                        .maximumSessions(1)                 // 하나의 아이디에 대한 다중 로그인 허용 개수
+                        .maxSessionsPreventsLogin(true));   // true: 초과 시 새로운 로그인 차단 / false: 초과 시 기존 세션 하나 삭제
+
+
+        // 세션 고정 보호 관련
+        http
+                .sessionManagement((auth) -> auth
+                        .sessionFixation().changeSessionId());
+        
         return http.build();    // 빌드해서 리턴
     }
 }

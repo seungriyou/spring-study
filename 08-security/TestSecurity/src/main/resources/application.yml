@@ -15,6 +15,10 @@ spring:
         # show_sql: true # System.out 출력은 off
         format_sql: true
         use_sql_comments: true
+server:
+  servlet:
+    session:
+      timeout: 90m  # default: 1800 (1800s)
 logging:
   level:
     org.hibernate.SQL: debug  # logger 출력 on
