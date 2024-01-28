@@ -23,10 +23,10 @@ public class SecurityConfig {
                 // 람다식으로 작성
                 // 작성 순서대로 우선순위 부여되므로 주의
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/login").permitAll()
+                        .requestMatchers("/", "/login", "/loginProc", "/join", "/joinProc").permitAll() // 모두 접근 가능
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")  // wildcard 사용 가능
-                        .anyRequest().authenticated()   // 로그인 한 사용자들은 접근 가능하도록
+                        .anyRequest().authenticated()   // 로그인한 사용자들은 접근 가능하도록
                 );
 
         // === 로그인 === //
