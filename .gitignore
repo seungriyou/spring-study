@@ -41,6 +41,10 @@ out/
 
 ### DB ###
 *.db
+**/db/**
+
+### env ###
+.env
 
 ### Maven ###
 **/target/**
