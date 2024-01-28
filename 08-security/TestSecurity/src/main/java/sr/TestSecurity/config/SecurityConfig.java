@@ -21,6 +21,17 @@ public class SecurityConfig {
                         .anyRequest().authenticated()   // 로그인 한 사용자들은 접근 가능하도록
                 );
 
+        // === 로그인 === //
+        http
+                .formLogin((auth) -> auth.loginPage("/login")   // 로그인 페이지 경로 (admin 페이지 접근 시 자동으로 리다이렉트)
+                        .loginProcessingUrl("/loginProc")       // POST 방식으로 로그인 데이터를 넘긴다.
+                        .permitAll()                            // 누구나 들어올 수 있다.
+                );
+
+        // 개발 환경에서는 잠시 disable 시켜두자.
+        http
+                .csrf((auth) -> auth.disable());                // 스프링 시큐리티에서는 기본적으로 csrf 설정이 되어있는데, 이러면 POST 시 csrf 토큰도 보내주어야 한다.
+
         return http.build();    // 빌드해서 리턴
     }
 }
