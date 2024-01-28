@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import sr.TestSecurity.dto.JoinDTO;
-import sr.TestSecurity.entity.Role;
 import sr.TestSecurity.entity.User;
 import sr.TestSecurity.repository.UserRepository;
 
@@ -28,7 +27,7 @@ public class JoinService {
         User user = new User();
         user.setUsername(joinDTO.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
-        user.setRole(Role.USER);
+        user.setRole("ROLE_ADMIN");
 
         userRepository.save(user);
     }
