@@ -2,6 +2,7 @@ package sr.TestSecurity.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,11 +31,15 @@ public class SecurityConfig {
                 );
 
         // === 로그인 === //
+        // formLogin 방식
+//        http
+//                .formLogin((auth) -> auth.loginPage("/login")   // 로그인 페이지 경로 (admin 페이지 접근 시 자동으로 리다이렉트)
+//                        .loginProcessingUrl("/loginProc")       // POST 방식으로 로그인 데이터를 넘긴다.
+//                        .permitAll()                            // 누구나 들어올 수 있다.
+//                );
+        // httpBasic 방식
         http
-                .formLogin((auth) -> auth.loginPage("/login")   // 로그인 페이지 경로 (admin 페이지 접근 시 자동으로 리다이렉트)
-                        .loginProcessingUrl("/loginProc")       // POST 방식으로 로그인 데이터를 넘긴다.
-                        .permitAll()                            // 누구나 들어올 수 있다.
-                );
+                .httpBasic(Customizer.withDefaults());
 
         // 개발 환경에서는 잠시 disable 시켜두자.
         http
@@ -51,7 +56,7 @@ public class SecurityConfig {
         http
                 .sessionManagement((auth) -> auth
                         .sessionFixation().changeSessionId());
-        
+
         return http.build();    // 빌드해서 리턴
     }
 }
