@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    # jdbc:mysql://아이피:3306/데이터베이스?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/practice?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: sryou
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        # show_sql: true # System.out 출력은 off
+        format_sql: true
+        use_sql_comments: true
+logging:
+  level:
+    org.hibernate.SQL: debug  # logger 출력 on
+#    org.hibernate.type: trace
