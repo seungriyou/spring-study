@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import sr.security.springjwt.jwt.JwtFilter;
 import sr.security.springjwt.jwt.JwtUtil;
 import sr.security.springjwt.jwt.LoginFilter;
 
@@ -57,6 +58,10 @@ public class SecurityConfig {
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
+        // JWT 검증 필터 등록 (LoginFilter 앞에)
+        http
+                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class);
+        
         // 커스텀 로그인 필터 등록 (UsernamePasswordAuthenticationFilter 대체해서 등록할 것이므로 addFilterAt 사용)
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
