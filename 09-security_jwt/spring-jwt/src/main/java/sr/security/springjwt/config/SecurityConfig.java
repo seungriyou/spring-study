@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import sr.security.springjwt.jwt.JwtUtil;
 import sr.security.springjwt.jwt.LoginFilter;
 
 @Configuration
@@ -19,6 +20,7 @@ import sr.security.springjwt.jwt.LoginFilter;
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JwtUtil jwtUtil;
 
     // AuthenticationManager Bean 등록
     @Bean
@@ -57,7 +59,7 @@ public class SecurityConfig {
 
         // 커스텀 로그인 필터 등록 (UsernamePasswordAuthenticationFilter 대체해서 등록할 것이므로 addFilterAt 사용)
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         // 세션 stateless 설정 (중요**)
         http
